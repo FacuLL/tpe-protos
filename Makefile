@@ -9,7 +9,7 @@
 #   make SANITIZE=1    compila con AddressSanitizer + UBSan
 
 CC       := gcc
-CPPFLAGS := -D_POSIX_C_SOURCE=200112L -Isrc/utils -Isrc/server
+CPPFLAGS := -D_POSIX_C_SOURCE=200112L -Isrc/utils -Isrc/server -Isrc/server/shared -Isrc/server/proxy -Isrc/server/management
 CFLAGS   := -std=c11 -pedantic -pedantic-errors -Wall -Wextra -g -pthread -MMD -MP
 LDFLAGS  := -pthread
 LDLIBS   :=
@@ -26,7 +26,10 @@ BIN_DIR  := bin
 # sources
 
 UTILS_SRC  := $(wildcard $(SRC_DIR)/utils/*.c)
-SERVER_SRC := $(wildcard $(SRC_DIR)/server/*.c)
+SERVER_SRC := $(wildcard $(SRC_DIR)/server/*.c) \
+              $(wildcard $(SRC_DIR)/server/shared/*.c) \
+              $(wildcard $(SRC_DIR)/server/proxy/*.c) \
+              $(wildcard $(SRC_DIR)/server/management/*.c)
 
 UTILS_OBJ  := $(UTILS_SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 SERVER_OBJ := $(SERVER_SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

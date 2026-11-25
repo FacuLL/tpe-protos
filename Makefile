@@ -61,7 +61,7 @@ TEST_BIN   := $(BIN_DIR)/test
 CHECK_LIBS := $(shell pkg-config --libs check 2>/dev/null || echo -lcheck -lm -lrt)
 U          := $(SRC_DIR)/utils
 
-TESTS := buffer_test netutils_test parser_test parser_utils_test selector_test stm_test
+TESTS := buffer_test netutils_test parser_test parser_utils_test selector_test stm_test users_test
 
 $(TEST_BIN)/buffer_test:       $(TEST_DIR)/buffer_test.c
 $(TEST_BIN)/netutils_test:     $(TEST_DIR)/netutils_test.c     $(U)/netutils.c $(U)/buffer.c
@@ -69,6 +69,7 @@ $(TEST_BIN)/parser_test:       $(TEST_DIR)/parser_test.c       $(U)/parser.c
 $(TEST_BIN)/parser_utils_test: $(TEST_DIR)/parser_utils_test.c $(U)/parser_utils.c $(U)/parser.c
 $(TEST_BIN)/selector_test:     $(TEST_DIR)/selector_test.c
 $(TEST_BIN)/stm_test:          $(TEST_DIR)/stm_test.c          $(U)/stm.c
+$(TEST_BIN)/users_test:        $(TEST_DIR)/users_test.c        $(SRC_DIR)/server/shared/users.c
 
 $(TEST_BIN)/%:
 	@mkdir -p $(dir $@)
